@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Now - BrewRoute Coffee</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">BrewRoute</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="order-page">
+            <h1>Place Your Order</h1>
+            <p>Fill out the form below and we'll have your drink ready for pickup</p>
+
+            <form class="order-form">
+                <div class="form-group">
+                    <label for="customer-name">Your Name</label>
+                    <input type="text" id="customer-name" name="customer-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="drink-choice">Choose Your Drink</label>
+                    <select id="drink-choice" name="drink-choice" required>
+                        <option value="">Select a drink</option>
+                        <option value="oat-latte">Oat Milk Latte - $5.25</option>
+                        <option value="cappuccino">Cappuccino - $4.75</option>
+                        <option value="americano">Americano - $3.75</option>
+                        <option value="flat-white">Flat White - $5.00</option>
+                        <option value="cold-brew">Cold Brew - $4.50</option>
+                        <option value="iced-latte">Iced Latte - $5.25</option>
+                        <option value="drip">Drip Brew - $3.25</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="size">Size</label>
+                    <select id="size" name="size" required>
+                        <option value="">Select size</option>
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pickup-time">Pickup Time</label>
+                    <input type="time" id="pickup-time" name="pickup-time" min="07:00" max="16:00" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="special-instructions">Special Instructions (optional)</label>
+                    <textarea id="special-instructions" name="special-instructions" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="payment-method">Payment Method</label>
+                    <select id="payment-method" name="payment-method" required>
+                        <option value="">Select payment</option>
+                        <option value="card">Credit/Debit Card</option>
+                        <option value="apple-pay">Apple Pay</option>
+                        <option value="google-pay">Google Pay</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">Place Order</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 BrewRoute Coffee. Downtown Ottawa.</p>
+    </footer>
+</body>
+</html>
