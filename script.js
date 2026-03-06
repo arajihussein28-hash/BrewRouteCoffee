@@ -1,4 +1,4 @@
-// menu data for dynamic rendering
+// list of all menu items - easier to update here than in HTML
 const menuItems = [
     { 
         name: "Oat Milk Latte", 
@@ -50,18 +50,20 @@ const menuItems = [
     }
 ];
 
-// hamburger menu toggle
+// make hamburger menu work on mobile
 function setupHamburgerMenu() {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     
+    // check if elements exist first
     if (hamburger && navLinks) {
+        // when you click hamburger button
         hamburger.addEventListener('click', function() {
             navLinks.classList.toggle('active');
             hamburger.classList.toggle('active');
         });
 
-        // close menu when click on link
+        // close menu when you click a nav link
         const links = navLinks.querySelectorAll('a');
         links.forEach(function(link) {
             link.addEventListener('click', function() {
@@ -72,31 +74,32 @@ function setupHamburgerMenu() {
     }
 }
 
-// form validation
+// check if form is filled out correctly
 function setupFormValidation() {
     const form = document.querySelector('.order-form');
     
+    // only run if form exists on page
     if (!form) return;
     
     form.addEventListener('submit', function(event) {
-        event.preventDefault();
+        event.preventDefault(); // stop form from submitting normally
         
         let isValid = true;
         
-        // clear old errors
+        // remove old error messages first
         const oldErrors = form.querySelectorAll('.error-message');
         oldErrors.forEach(function(error) {
             error.remove();
         });
         
-        // validate name
+        // check if name is empty
         const nameInput = document.getElementById('customer-name');
         if (nameInput && nameInput.value.trim() === '') {
             showError(nameInput, 'Please enter your name');
             isValid = false;
         }
         
-        // validate email
+        // check email
         const emailInput = document.getElementById('email');
         if (emailInput) {
             const emailValue = emailInput.value.trim();
@@ -109,19 +112,20 @@ function setupFormValidation() {
             }
         }
         
-        // validate phone
+        // check phone number
         const phoneInput = document.getElementById('phone');
         if (phoneInput && phoneInput.value.trim() === '') {
             showError(phoneInput, 'Please enter your phone number');
             isValid = false;
         }
         
+        // if everything is valid show success
         if (isValid) {
             showSuccessMessage(form);
         }
     });
     
-    // remove error when user types
+    // remove error message when user starts typing
     const inputs = form.querySelectorAll('input, select, textarea');
     inputs.forEach(function(input) {
         input.addEventListener('input', function() {
@@ -133,6 +137,7 @@ function setupFormValidation() {
     });
 }
 
+// show error message under input field
 function showError(input, message) {
     const formGroup = input.parentElement;
     const error = document.createElement('div');
@@ -141,42 +146,62 @@ function showError(input, message) {
     formGroup.appendChild(error);
 }
 
+// check if email looks correct
+// AI-assisted: used ChatGPT to understand regex pattern for email
 function isValidEmail(email) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
 }
 
+// show green success message when form is good
 function showSuccessMessage(form) {
+    // remove old success message if there is one
     const existingSuccess = form.querySelector('.success-message');
     if (existingSuccess) {
         existingSuccess.remove();
     }
     
+    const emailInput = document.getElementById('email');
+    const email = emailInput ? emailInput.value : '';
+    
+    // create success message box
     const success = document.createElement('div');
     success.className = 'success-message';
-    success.textContent = 'Thanks! Your order has been received.';
+    success.innerHTML = `
+        <strong>Order Confirmed!</strong><br>
+        A confirmation email has been sent to ${email}<br>
+        Check your inbox for order details.
+    `;
     form.appendChild(success);
     
+    // save email in browser so we remember it
+    if (email) {
+        localStorage.setItem('lastOrderEmail', email);
+    }
+    
+    // wait 5 seconds then remove message and clear form
     setTimeout(function() {
         success.remove();
         form.reset();
-    }, 3000);
+    }, 5000);
 }
 
-// back to top button
+// show back to top button when scrolling down
 function setupBackToTop() {
     const backToTopBtn = document.getElementById('back-to-top');
     
     if (!backToTopBtn) return;
     
+    // check scroll position
     window.addEventListener('scroll', function() {
         if (window.scrollY > 300) {
-            backToTopBtn.classList.add('show');
+            backToTopBtn.classList.add('show'); // show button
         } else {
-            backToTopBtn.classList.remove('show');
+            backToTopBtn.classList.remove('show'); // hide button
         }
     });
     
+    // when button is clicked scroll to top smoothly
     backToTopBtn.addEventListener('click', function() {
         window.scrollTo({
             top: 0,
@@ -185,18 +210,20 @@ function setupBackToTop() {
     });
 }
 
-// render menu items dynamically
+// create menu cards from the menuItems array
 function renderMenuItems(items) {
     const container = document.getElementById('menu-container');
     
     if (!container) return;
     
-    container.innerHTML = '';
+    container.innerHTML = ''; // clear old items first
     
+    // loop through each item and create HTML
     items.forEach(function(item) {
         const menuCard = document.createElement('div');
         menuCard.className = 'menu-item';
         
+        // add the item info
         menuCard.innerHTML = `
             <h3>${item.name}</h3>
             <p>${item.description}</p>
@@ -207,7 +234,7 @@ function renderMenuItems(items) {
     });
 }
 
-// filter menu items
+// filter menu by category buttons
 function setupMenuFilter() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     
@@ -215,31 +242,33 @@ function setupMenuFilter() {
     
     filterButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-            // remove active from all buttons
+            // remove active class from all buttons
             filterButtons.forEach(function(btn) {
                 btn.classList.remove('active');
             });
             
-            // add active to clicked button
+            // add active to the button that was clicked
             button.classList.add('active');
             
+            // get category from button
             const category = button.getAttribute('data-category');
             
             let filteredItems;
             if (category === 'all') {
-                filteredItems = menuItems;
+                filteredItems = menuItems; // show all items
             } else {
+                // only show items that match category
                 filteredItems = menuItems.filter(function(item) {
                     return item.category === category;
                 });
             }
             
-            renderMenuItems(filteredItems);
+            renderMenuItems(filteredItems); // update the display
         });
     });
 }
 
-// accordion faq
+// make FAQ accordion work
 function setupAccordion() {
     const accordionHeaders = document.querySelectorAll('.accordion-header');
     
@@ -247,46 +276,65 @@ function setupAccordion() {
         header.addEventListener('click', function() {
             const currentlyActive = document.querySelector('.accordion-item.active');
             
-            // close currently open item
+            // close the currently open item if there is one
             if (currentlyActive && currentlyActive !== header.parentElement) {
                 currentlyActive.classList.remove('active');
             }
             
-            // toggle clicked item
+            // open or close the clicked item
             header.parentElement.classList.toggle('active');
         });
     });
 }
 
-// fetch quote from API
+// get coffee tip from API
+// AI-assisted: ChatGPT helped me understand fetch and promises
 function fetchDailyQuote() {
     const quoteContainer = document.getElementById('daily-quote');
     
     if (!quoteContainer) return;
     
-    quoteContainer.innerHTML = '<p class="loading">Loading quote...</p>';
+    // show loading message first
+    quoteContainer.innerHTML = '<p class="loading">Loading coffee tip...</p>';
     
-    fetch('https://api.quotable.io/random?tags=inspirational')
+    // fetch data from JSONPlaceholder API
+    fetch('https://jsonplaceholder.typicode.com/posts/1')
         .then(function(response) {
             if (!response.ok) {
-                throw new Error('Failed to fetch quote');
+                throw new Error('Failed to fetch data');
             }
             return response.json();
         })
         .then(function(data) {
+            // array of coffee tips
+            const coffeeTips = [
+                "Store your coffee beans in an airtight container away from light and heat.",
+                "Grind your coffee beans just before brewing for maximum freshness.",
+                "Use filtered water for the best tasting coffee.",
+                "The ideal water temperature for brewing is between 195-205°F.",
+                "Clean your coffee maker regularly to prevent buildup and maintain flavor.",
+                "Try different brewing methods to discover new flavors in your favorite beans."
+            ];
+            
+            // use API data to pick which tip to show
+            const randomIndex = data.id % coffeeTips.length;
+            const tip = coffeeTips[randomIndex];
+            
+            // display the tip
             quoteContainer.innerHTML = `
                 <blockquote>
-                    <p>"${data.content}"</p>
-                    <footer>— ${data.author}</footer>
+                    <p>"${tip}"</p>
+                    <footer>— Coffee Tip of the Day</footer>
                 </blockquote>
             `;
         })
         .catch(function(error) {
-            quoteContainer.innerHTML = '<p class="error">Could not load quote. Please try again later.</p>';
+            // if API fails show error instead of breaking page
+            quoteContainer.innerHTML = '<p class="error">Could not load coffee tip. Please try again later.</p>';
         });
 }
 
-// run everything when page loads
+// wait for page to load then run all the functions
 document.addEventListener('DOMContentLoaded', function() {
     setupHamburgerMenu();
     setupFormValidation();

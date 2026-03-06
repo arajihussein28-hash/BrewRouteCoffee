@@ -74,10 +74,10 @@ I made some changes from my original design:
 
 **Challenges:** Learning Array.filter() method. Also had to make sure the "All" button showed everything again.
 
-### ✓ Request 7: API - Daily Quote
-**What I built:** Home page fetches a random inspirational quote from Quotable API. Shows "Loading..." while fetching. If it fails shows error message instead of breaking the page.
+### ✓ Request 7: API - Coffee Tip of the Day
+**What I built:** Home page fetches data from JSONPlaceholder API and uses it to display a coffee tip. Shows "Loading..." while fetching. If it fails shows error message instead of breaking the page.
 
-**Challenges:** Understanding promises and .then() was confusing at first. Also had to handle errors properly with .catch() so site doesnt crash if API is down.
+**Challenges:** Understanding promises and .then() was confusing at first. Also had to handle errors properly with .catch() so site doesnt crash if API is down. Had to switch from Quotable API to JSONPlaceholder because of network issues.
 
 ## AI Usage
 
