@@ -745,3 +745,264 @@ footer {
         padding: 1.5rem 1rem;
     }
 }
+
+/* hamburger menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: #1a1a1a;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-links {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: #ffffff;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+        padding: 2rem 0;
+    }
+    
+    .nav-links.active {
+        left: 0;
+    }
+    
+    .nav-links li {
+        margin: 1rem 0;
+    }
+}
+
+/* back to top button */
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #b8704f;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(184, 112, 79, 0.3);
+    z-index: 999;
+}
+
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#back-to-top:hover {
+    background-color: #a35f42;
+    transform: translateY(-5px);
+}
+
+/* filter buttons */
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    border-color: #b8704f;
+    color: #b8704f;
+}
+
+.filter-btn.active {
+    background-color: #b8704f;
+    color: white;
+    border-color: #b8704f;
+}
+
+/* accordion */
+.faq-section {
+    padding: 4rem 2rem;
+    background-color: #fff;
+}
+
+.faq-section h2 {
+    color: #1a1a1a;
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.accordion-item {
+    background-color: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+    background-color: #fafafa;
+}
+
+.accordion-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.accordion-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #b8704f;
+    transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(45deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 200px;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.accordion-content p {
+    margin: 0;
+    color: #4a4a4a;
+    line-height: 1.6;
+}
+
+/* form validation errors */
+.error-message {
+    color: #d32f2f;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.success-message {
+    background-color: #4caf50;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* daily quote section */
+.daily-inspiration {
+    padding: 4rem 2rem;
+    background-color: #fafafa;
+}
+
+.daily-inspiration h2 {
+    color: #1a1a1a;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+#daily-quote {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#daily-quote blockquote {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border-left: 4px solid #b8704f;
+}
+
+#daily-quote blockquote p {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+#daily-quote blockquote footer {
+    color: #666;
+    font-size: 1rem;
+    font-style: normal;
+}
+
+#daily-quote .loading {
+    color: #666;
+    font-style: italic;
+}
+
+#daily-quote .error {
+    color: #d32f2f;
+}
