@@ -114,9 +114,15 @@ function setupFormValidation() {
         
         // check phone number
         const phoneInput = document.getElementById('phone');
-        if (phoneInput && phoneInput.value.trim() === '') {
-            showError(phoneInput, 'Please enter your phone number');
-            isValid = false;
+        if (phoneInput) {
+            const phoneValue = phoneInput.value.trim();
+            if (phoneValue === '') {
+                showError(phoneInput, 'Please enter your phone number');
+                isValid = false;
+            } else if (!isValidPhone(phoneValue)) {
+                showError(phoneInput, 'Please enter a valid phone number');
+                isValid = false;
+            }
         }
         
         // if everything is valid show success
@@ -151,6 +157,12 @@ function showError(input, message) {
 function isValidEmail(email) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
+}
+
+// check if phone number has only numbers and valid characters
+function isValidPhone(phone) {
+    const phonePattern = /^[\d\s\-\(\)]+$/;
+    return phonePattern.test(phone) && phone.replace(/\D/g, '').length >= 10;
 }
 
 // show green success message when form is good
