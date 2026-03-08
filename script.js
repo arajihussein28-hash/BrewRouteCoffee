@@ -192,9 +192,9 @@ function setupBackToTop() {
     
     if (!backToTopBtn) return;
     
-    // check scroll position - 300 pixels seemed like good amount
+    // check scroll position - 350 pixels seemed like good amount
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
+        if (window.scrollY > 350) {
             backToTopBtn.classList.add('show'); // show button
         } else {
             backToTopBtn.classList.remove('show'); // hide button
