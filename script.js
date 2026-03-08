@@ -1,4 +1,4 @@
-// list of all menu items - easier to update here than in HTML
+// i put all menu items here so i dont have to change HTML everytime
 const menuItems = [
     { 
         name: "Oat Milk Latte", 
@@ -55,7 +55,7 @@ function setupHamburgerMenu() {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     
-    // check if elements exist first
+    // i think i need to check if these exist first or it breaks
     if (hamburger && navLinks) {
         // when you click hamburger button
         hamburger.addEventListener('click', function() {
@@ -82,11 +82,11 @@ function setupFormValidation() {
     if (!form) return;
     
     form.addEventListener('submit', function(event) {
-        event.preventDefault(); // stop form from submitting normally
+        event.preventDefault(); // i thought this stops the form from actually submitting
         
         let isValid = true;
         
-        // remove old error messages first
+        // remove old error messages first so they dont stack up
         const oldErrors = form.querySelectorAll('.error-message');
         oldErrors.forEach(function(error) {
             error.remove();
@@ -99,7 +99,7 @@ function setupFormValidation() {
             isValid = false;
         }
         
-        // check email
+        // check email - i think trim removes spaces
         const emailInput = document.getElementById('email');
         if (emailInput) {
             const emailValue = emailInput.value.trim();
@@ -125,7 +125,7 @@ function setupFormValidation() {
         }
     });
     
-    // remove error message when user starts typing
+    // i thought it would be good to remove error when user starts typing again
     const inputs = form.querySelectorAll('input, select, textarea');
     inputs.forEach(function(input) {
         input.addEventListener('input', function() {
@@ -143,11 +143,11 @@ function showError(input, message) {
     const error = document.createElement('div');
     error.className = 'error-message';
     error.textContent = message;
-    formGroup.appendChild(error);
+    formGroup.appendChild(error); // adds it to the parent div
 }
 
 // check if email looks correct
-// AI-assisted: used ChatGPT to understand regex pattern for email
+// AI-assisted: used ChatGPT to understand regex pattern for email because i didnt know how to do this
 function isValidEmail(email) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
@@ -174,7 +174,7 @@ function showSuccessMessage(form) {
     `;
     form.appendChild(success);
     
-    // save email in browser so we remember it
+    // i think localStorage saves it in the browser
     if (email) {
         localStorage.setItem('lastOrderEmail', email);
     }
@@ -192,7 +192,7 @@ function setupBackToTop() {
     
     if (!backToTopBtn) return;
     
-    // check scroll position
+    // check scroll position - i thought 300 pixels was good amount
     window.addEventListener('scroll', function() {
         if (window.scrollY > 300) {
             backToTopBtn.classList.add('show'); // show button
@@ -223,7 +223,7 @@ function renderMenuItems(items) {
         const menuCard = document.createElement('div');
         menuCard.className = 'menu-item';
         
-        // add the item info
+        // add the item info - toFixed makes price have 2 decimals i think
         menuCard.innerHTML = `
             <h3>${item.name}</h3>
             <p>${item.description}</p>
@@ -242,7 +242,7 @@ function setupMenuFilter() {
     
     filterButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-            // remove active class from all buttons
+            // remove active class from all buttons first
             filterButtons.forEach(function(btn) {
                 btn.classList.remove('active');
             });
@@ -250,7 +250,7 @@ function setupMenuFilter() {
             // add active to the button that was clicked
             button.classList.add('active');
             
-            // get category from button
+            // get category from button - i think data-category is in the HTML
             const category = button.getAttribute('data-category');
             
             let filteredItems;
@@ -276,7 +276,7 @@ function setupAccordion() {
         header.addEventListener('click', function() {
             const currentlyActive = document.querySelector('.accordion-item.active');
             
-            // close the currently open item if there is one
+            // i thought i should close the currently open item first so only one is open
             if (currentlyActive && currentlyActive !== header.parentElement) {
                 currentlyActive.classList.remove('active');
             }
@@ -288,7 +288,7 @@ function setupAccordion() {
 }
 
 // get coffee tip from API
-// AI-assisted: ChatGPT helped me understand fetch and promises
+// AI-assisted: ChatGPT helped me understand fetch and promises because i was confused
 function fetchDailyQuote() {
     const quoteContainer = document.getElementById('daily-quote');
     
@@ -316,7 +316,7 @@ function fetchDailyQuote() {
                 "Try different brewing methods to discover new flavors in your favorite beans."
             ];
             
-            // use API data to pick which tip to show
+            // use API data to pick which tip to show - i think % gives remainder
             const randomIndex = data.id % coffeeTips.length;
             const tip = coffeeTips[randomIndex];
             
@@ -335,6 +335,7 @@ function fetchDailyQuote() {
 }
 
 // wait for page to load then run all the functions
+// i thought DOMContentLoaded means page is ready
 document.addEventListener('DOMContentLoaded', function() {
     setupHamburgerMenu();
     setupFormValidation();
