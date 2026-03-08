@@ -106,7 +106,7 @@ I used ChatGPT to help with some parts of this project:
 - All the CSS styling for new features
 - Decided where each feature should go on the pages
 
-I estimate about 75% of the code is written by me and 25% was helped by AI for learning new concepts.
+I estimate about 69% to 70% of the code is written by me and the rest was helped by ChatGPT for learning new concepts.
 
 ## Technical Features
 
