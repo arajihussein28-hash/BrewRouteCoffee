@@ -55,7 +55,7 @@ function setupHamburgerMenu() {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     
-    // i think i need to check if these exist first or it breaks
+    // check if these exist first or it breaks
     if (hamburger && navLinks) {
         // when you click hamburger button
         hamburger.addEventListener('click', function() {
@@ -82,7 +82,7 @@ function setupFormValidation() {
     if (!form) return;
     
     form.addEventListener('submit', function(event) {
-        event.preventDefault(); // i thought this stops the form from actually submitting
+        event.preventDefault(); // stops the form from actually submitting
         
         let isValid = true;
         
@@ -99,7 +99,7 @@ function setupFormValidation() {
             isValid = false;
         }
         
-        // check email - i think trim removes spaces
+        // check email - trim removes spaces
         const emailInput = document.getElementById('email');
         if (emailInput) {
             const emailValue = emailInput.value.trim();
@@ -125,7 +125,7 @@ function setupFormValidation() {
         }
     });
     
-    // i thought it would be good to remove error when user starts typing again
+    // remove error when user starts typing again
     const inputs = form.querySelectorAll('input, select, textarea');
     inputs.forEach(function(input) {
         input.addEventListener('input', function() {
@@ -174,7 +174,7 @@ function showSuccessMessage(form) {
     `;
     form.appendChild(success);
     
-    // i think localStorage saves it in the browser
+    // maybe this saves it in the browser for later
     if (email) {
         localStorage.setItem('lastOrderEmail', email);
     }
@@ -192,7 +192,7 @@ function setupBackToTop() {
     
     if (!backToTopBtn) return;
     
-    // check scroll position - i thought 300 pixels was good amount
+    // check scroll position - 300 pixels seemed like good amount
     window.addEventListener('scroll', function() {
         if (window.scrollY > 300) {
             backToTopBtn.classList.add('show'); // show button
@@ -223,7 +223,7 @@ function renderMenuItems(items) {
         const menuCard = document.createElement('div');
         menuCard.className = 'menu-item';
         
-        // add the item info - toFixed makes price have 2 decimals i think
+        // add the item info - toFixed makes price have 2 decimals
         menuCard.innerHTML = `
             <h3>${item.name}</h3>
             <p>${item.description}</p>
@@ -250,7 +250,7 @@ function setupMenuFilter() {
             // add active to the button that was clicked
             button.classList.add('active');
             
-            // get category from button - i think data-category is in the HTML
+            // get category from button - data-category is in the HTML
             const category = button.getAttribute('data-category');
             
             let filteredItems;
@@ -276,7 +276,7 @@ function setupAccordion() {
         header.addEventListener('click', function() {
             const currentlyActive = document.querySelector('.accordion-item.active');
             
-            // i thought i should close the currently open item first so only one is open
+            // close the currently open item first so only one is open
             if (currentlyActive && currentlyActive !== header.parentElement) {
                 currentlyActive.classList.remove('active');
             }
@@ -316,7 +316,7 @@ function fetchDailyQuote() {
                 "Try different brewing methods to discover new flavors in your favorite beans."
             ];
             
-            // use API data to pick which tip to show - i think % gives remainder
+            // use API data to pick which tip to show - % gives remainder
             const randomIndex = data.id % coffeeTips.length;
             const tip = coffeeTips[randomIndex];
             
@@ -335,7 +335,7 @@ function fetchDailyQuote() {
 }
 
 // wait for page to load then run all the functions
-// i thought DOMContentLoaded means page is ready
+// DOMContentLoaded means page is ready
 document.addEventListener('DOMContentLoaded', function() {
     setupHamburgerMenu();
     setupFormValidation();
